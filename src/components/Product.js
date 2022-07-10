@@ -2,13 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addItemToBasket, removeItemFromBasket } from '../features/basketSlice';
 
-function Product({ id, title }) {
+function Product({ id, title, price }) {
   const dispatch = useDispatch();
 
   const addItem = () => {
     const product = {
       id,
       title,
+      price,
     };
     dispatch(addItemToBasket(product));
   };
@@ -18,8 +19,14 @@ function Product({ id, title }) {
   };
 
   return (
-    <div className='flex justify-between p-10 border-blue-700 border m-5'>
-      <p>{title}</p>
+    <div
+      className='flex justify-between items-center p-5 border-blue-700 border m-5
+    cursor-pointer hover:animate-pulse'
+    >
+      <div>
+        <p>{title}</p>
+        <p>${price}</p>
+      </div>
       <div className='flex flex-col'>
         <button
           onClick={addItem}

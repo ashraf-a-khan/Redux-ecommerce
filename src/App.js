@@ -1,30 +1,31 @@
 import React from 'react';
 import Product from './components/Product';
-import { useSelector } from 'react-redux';
-import { selectItemsCount } from './features/basketSlice';
+import BasketView from './components/BasketView';
+import Header from './components/Header';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  const numberOfItemsInBasket = useSelector(selectItemsCount);
-  console.log('The items are ', numberOfItemsInBasket);
-
   return (
-    <div>
-      <header className='p-4 flex justify-between items-center'>
-        <div>
-          <h1 className='text-5xl'>PAPA's Store</h1>
-          <h2>Your no. 1 store for react stuff</h2>
-        </div>
-        <div>
-          <h3>Items in your basket: {numberOfItemsInBasket} </h3>
-        </div>
-      </header>
-      <Product id='123' title='iPad Pro 2021' />
-      <Product id='1234' title='Soft Skills by John Sonmez' />
-      <Product id='1235' title='Rubiks Cube' />
-
-      {/* Product */}
-
-      {/* Product */}
+    <div className='p-4'>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path='/checkout'>
+            <BasketView />
+          </Route>
+          <Route path='/'>
+            <div>
+              <Product id='123' title='iPad Pro 2021' price={2000} />
+              <Product
+                id='1234'
+                title='Soft Skills by John Sonmez'
+                price={40}
+              />
+              <Product id='1235' title='Rubiks Cube' price={5} />
+            </div>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

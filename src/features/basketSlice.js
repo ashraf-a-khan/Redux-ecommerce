@@ -14,7 +14,7 @@ export const basketSlice = createSlice({
     removeItemFromBasket: (state, action) => {
       // use the id that we passed and remove the item from basket with that id
 
-      let copyOfBasket = state.items;
+      let newBasket = state.items;
 
       const index = state.items.findIndex(
         (item) => item.id === action.payload.id
@@ -22,8 +22,8 @@ export const basketSlice = createSlice({
 
       if (index !== -1) {
         //Splice the item out of the basket
-        copyOfBasket.splice(index, 1);
-        state.items = copyOfBasket;
+        newBasket.splice(index, 1);
+        state.items = newBasket;
       } else {
         alert('WOAH this item isnt in the basket');
       }
@@ -36,5 +36,7 @@ export const { addItemToBasket, removeItemFromBasket } = basketSlice.actions;
 //Selector
 export const selectItems = (state) => state.basket.items;
 export const selectItemsCount = (state) => state.basket.items.length;
+export const selectBasketTotalAmount = (state) =>
+  state.basket.items.reduce((total, item) => (total += item.price), 0);
 
 export default basketSlice.reducer;
