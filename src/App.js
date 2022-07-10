@@ -1,56 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import Product from './components/Product';
+import { useSelector } from 'react-redux';
+import { selectItemsCount } from './features/basketSlice';
 
 function App() {
+  const numberOfItemsInBasket = useSelector(selectItemsCount);
+  console.log('The items are ', numberOfItemsInBasket);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
+    <div>
+      <header className='p-4 flex justify-between items-center'>
+        <div>
+          <h1 className='text-5xl'>PAPA's Store</h1>
+          <h2>Your no. 1 store for react stuff</h2>
+        </div>
+        <div>
+          <h3>Items in your basket: {numberOfItemsInBasket} </h3>
+        </div>
       </header>
+      <Product id='123' title='iPad Pro 2021' />
+      <Product id='1234' title='Soft Skills by John Sonmez' />
+      <Product id='1235' title='Rubiks Cube' />
+
+      {/* Product */}
+
+      {/* Product */}
     </div>
   );
 }
